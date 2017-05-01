@@ -1,4 +1,5 @@
 import requests
+import sys
 
 rover_url = 'https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos'
 
@@ -12,5 +13,12 @@ def get_mars_photo_url(sol, api_key='DEMO_KEY'):
     for i in photos:
         print i['img_src']
 
-photo_url = get_mars_photo_url(sol=1580)
-print photo_url
+def main():
+    if sys.argv < 1:
+        print('To few arguments, please specify a SOL Day')
+
+    sol_num = sys.argv[1]
+    get_mars_photo_url(sol_num)
+
+if __name__ == '__main__':
+    main()
