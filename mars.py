@@ -1,6 +1,10 @@
 import requests
 import sys
+import os
+import urllib
 
+sol_num = sys.argv[1]
+rpath = sys.argv[2]
 rover_url = 'https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos'
 
 
@@ -10,15 +14,21 @@ def get_mars_photo_url(sol, api_key='DEMO_KEY'):
     response_dictionary = response.json()
     photos = response_dictionary['photos']
 
+    dpath = r'%s/%s' %(rpath, sol_num)
+    if not os.path.exists(dpath):
+        os.makedirs(dpath)
+
     for i in photos:
-        print i['img_src']
+        url = i['img_src']
+        image = url.rsplit('/',1)[1]
+        directory = os.path.join(dpath , image)
+        urllib.urlretrieve(url, directory)
+
+
 
 def main():
-    if sys.argv < 1:
-        print('To few arguments, please specify a SOL Day')
-
-    sol_num = sys.argv[1]
     get_mars_photo_url(sol_num)
+
 
 if __name__ == '__main__':
     main()
