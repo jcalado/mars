@@ -20,8 +20,8 @@ def get_mars_photo_url(sol, api_key='DEMO_KEY'):
 
     for i in photos:
         url = i['img_src']
-        image = url.rsplit('/',1)[1]
-        directory = os.path.join(dpath , image)
+        image = url.rsplit('/', 1)[1]
+        directory = os.path.join(dpath, image)
         urllib.urlretrieve(url, directory)
 
 
