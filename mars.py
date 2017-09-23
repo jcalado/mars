@@ -1,10 +1,17 @@
 import requests
-import sys
 import os
 import urllib
+import argparse
 
-sol_num = sys.argv[1]
-rpath = sys.argv[2]
+parser = argparse.ArgumentParser(description='Download NASA Curiosity Photos')
+parser.add_argument('-d', '--dest', help= "Download Directory", required=True)
+parser.add_argument('-s', '--sol', help= "Mars SOL Day(s)", required=True)
+args = parser.parse_args()
+
+rpath = args.dest
+asol = args.sol.split("-")
+
+
 rover_url = 'https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos'
 
 
@@ -27,7 +34,14 @@ def get_mars_photo_url(sol, api_key='DEMO_KEY'):
 
 
 def main():
-    get_mars_photo_url(sol_num)
+    
+    global asol, sol_num
+    while ( asol[0] <= asol[1] ):
+        asol[0] = int(asol[0])
+        asol[1] = int(asol[1])
+        sol_num = asol[0]
+        get_mars_photo_url(sol_num)
+        asol[0] += 1
 
 
 if __name__ == '__main__':
