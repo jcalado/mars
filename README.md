@@ -6,14 +6,17 @@ You can download Curosity Photos from MARS!
 
 ### Usage:
 
->usage: mars.py [-h] -d DEST -s SOL
+usage: mars.py [-h] -d DEST -s SOL
 
->Download NASA Curiosity Photos
+Download NASA Curiosity Photos
 
->optional arguments:
->  -h, --help            show this help message and exit
->  -d DEST, --dest DEST  Download Directory
->  -s SOL, --sol SOL     Mars SOL Day(s)
+optional arguments:
+
+  -h, --help            show this help message and exit
+
+  -d DEST, --dest DEST  Download Directory
+  
+  -s SOL, --sol SOL     Mars SOL Day(s)
 
 ### Examples:
 
