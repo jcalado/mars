@@ -3,10 +3,12 @@ import os
 import urllib
 import argparse
 
+
 parser = argparse.ArgumentParser(description='Download NASA Curiosity Photos')
 parser.add_argument('-d', '--dest', help= "Download Directory", required=True)
 parser.add_argument('-s', '--sol', help= "Mars SOL Day(s)", required=True)
 args = parser.parse_args()
+
 
 rpath = args.dest
 asol = args.sol.split("-")
@@ -32,7 +34,6 @@ def get_mars_photo_url(sol, api_key='DEMO_KEY'):
         urllib.urlretrieve(url, directory)
 
 
-
 def main():
 
     global asol, sol_num
@@ -42,6 +43,7 @@ def main():
         sol_num = asol[0]
         get_mars_photo_url(sol_num)
         asol[0] += 1
+
 
 
 if __name__ == '__main__':
