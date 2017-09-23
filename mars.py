@@ -34,7 +34,7 @@ def get_mars_photo_url(sol, api_key='DEMO_KEY'):
 
 
 def main():
-    
+
     global asol, sol_num
     while ( asol[0] <= asol[1] ):
         asol[0] = int(asol[0])
