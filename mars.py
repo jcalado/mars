@@ -1,6 +1,6 @@
 import requests
 import os
-import urllib
+import urllib.request
 import argparse
 
 
@@ -31,7 +31,7 @@ def get_mars_photo_url(sol, api_key='DEMO_KEY'):
         url = i['img_src']
         image = url.rsplit('/', 1)[1]
         directory = os.path.join(dpath, image)
-        urllib.urlretrieve(url, directory)
+        urllib.request.urlretrieve(url, directory)
 
 
 def main():
