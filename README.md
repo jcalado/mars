@@ -24,11 +24,11 @@ Examples:
 --------
 * For only a SOL download:
 ```shell script
-$ python mars.py -d ~/Photos/MARS -s 1800
+$ python mars.py -d ~/Photos/MARS -s 2000
 ```
 * For multi SOL download:
 ```shell script
-$ python mars.py -d ~/Photos/MARS -s 1800-1819
+$ python mars.py -d ~/Photos/MARS -s 2000-2001
 ```
  
 [What is SOL?](https://www.giss.nasa.gov/tools/mars24/help/notes.html)
