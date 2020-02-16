@@ -3,18 +3,22 @@ import os
 import urllib.request
 import argparse
 
-
 parser = argparse.ArgumentParser(description='Download NASA Curiosity Photos')
-parser.add_argument('-d', '--dest', help= "Download Directory", required=True)
-parser.add_argument('-s', '--sol', help= "Mars SOL Day(s)", required=True)
+parser.add_argument('-d', '--dest', help="Download Directory", required=True)
+parser.add_argument('-s', '--sol', help="Mars SOL Day(s)", required=True)
 args = parser.parse_args()
-
 
 rpath = args.dest
 asol = args.sol.split("-")
 
-
 rover_url = 'https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos'
+
+
+def solrange(start, end):
+    if start > end:
+        return range(end, start + 1)
+    else:
+        return range(start, end + 1)
 
 
 def get_mars_photo_url(sol, api_key='DEMO_KEY'):
@@ -23,7 +27,7 @@ def get_mars_photo_url(sol, api_key='DEMO_KEY'):
     response_dictionary = response.json()
     photos = response_dictionary['photos']
 
-    dpath = r'%s/%s' %(rpath, sol_num)
+    dpath = r'%s/%s' % (rpath, sol)
     if not os.path.exists(dpath):
         os.makedirs(dpath)
 
@@ -35,15 +39,13 @@ def get_mars_photo_url(sol, api_key='DEMO_KEY'):
 
 
 def main():
-
-    global asol, sol_num
-    while ( asol[0] <= asol[1] ):
-        asol[0] = int(asol[0])
-        asol[1] = int(asol[1])
-        sol_num = asol[0]
-        get_mars_photo_url(sol_num)
-        asol[0] += 1
-
+    global asol
+    if len(asol) == 1:
+        get_mars_photo_url(sol=asol[0])
+    else:
+        asol = [int(i) for i in asol]
+        for i in solrange(asol[0], asol[1]):
+            get_mars_photo_url(sol=i)
 
 
 if __name__ == '__main__':
